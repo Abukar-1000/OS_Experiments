@@ -1,6 +1,9 @@
-main: FIFO 
-	g++ -std=c++17 Process.o ExecutionMetric.o IScheduler.o FIFO.o main.cpp -o schedulingEx
+main: FIFO SJF
+	g++ -std=c++17 Process.o ExecutionMetric.o IScheduler.o FIFO.o SJF.o main.cpp -o schedulingEx
 	./schedulingEx
+
+SJF: ISchedule
+	g++ -std=c++17 -g -c IScheduler.o ..\core\scheduling\SJF.cpp -o SJF.o
 
 FIFO: ISchedule
 	g++ -std=c++17 -g -c IScheduler.o ..\core\scheduling\FIFO.cpp -o FIFO.o

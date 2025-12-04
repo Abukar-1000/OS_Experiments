@@ -6,6 +6,7 @@ Process::Process()
 :   executionTimeUpperBound(100000),
     completionTime(NULL),
     firstRunTime(NULL),
+    arrivalTime(NULL),
     elapsedTime(0)
 {
     this->executionTime = rand() % this->executionTimeUpperBound;
@@ -16,6 +17,7 @@ Process::Process(size_t time)
     completionTime(NULL),
     firstRunTime(NULL),
     executionTime(time),
+    arrivalTime(NULL),
     elapsedTime(0)
 {}
 
@@ -25,6 +27,7 @@ Process::Process(Process&& other)
     this->executionTime = other.executionTime;
     this->firstRunTime = other.firstRunTime;
     this->elapsedTime = other.elapsedTime;
+    this->arrivalTime = other.arrivalTime;
 }
 
 Process::Process(const Process& other)
@@ -33,6 +36,7 @@ Process::Process(const Process& other)
     this->executionTime = other.executionTime;
     this->firstRunTime = other.firstRunTime;
     this->elapsedTime = other.elapsedTime;
+    this->arrivalTime = other.arrivalTime;
 }
 
 Process& Process::operator= (const Process& other)
@@ -41,6 +45,7 @@ Process& Process::operator= (const Process& other)
     this->executionTime = other.executionTime;
     this->firstRunTime = other.firstRunTime;
     this->elapsedTime = other.elapsedTime;
+    this->arrivalTime = other.arrivalTime;
     
     return *this;
 }
@@ -65,6 +70,11 @@ void Process::setCompletionTime(size_t time)
     this->completionTime = time;
 }
 
+void Process::setArrivalTime(size_t time)
+{
+    this->arrivalTime = time;
+}
+
 void Process::withExecutionTimeUpperBound(int bound)
 {
     this->executionTimeUpperBound = bound;
@@ -82,6 +92,16 @@ size_t Process::getFirstRunTime(void)
 size_t Process::getCompletionTime(void)
 {
     return this->completionTime;
+}
+
+size_t Process::getArrivalTime(void)
+{
+    return this->arrivalTime;
+}
+
+size_t Process::getExecutionTime(void)
+{
+    return this->executionTime;
 }
 
 size_t Process::getElapsedTime(void)

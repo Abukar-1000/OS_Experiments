@@ -4,6 +4,7 @@
 #include "../metrics/scheduling/ExecutionMetric.h"
 #include <vector>
 #include <cstddef>
+#include <algorithm>
 
 class IScheduler 
 {
@@ -15,6 +16,9 @@ class IScheduler
         IScheduler(size_t size);
         void displayMetrics(void);
         virtual void run(void) = 0;
+        void sortProcessesDecending(void);
+        void sortProcessExecutionTimeDecending(void);
+        void randomizeProcessArrivalTime(void);
         ~IScheduler();        
 };
 

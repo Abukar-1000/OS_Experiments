@@ -17,9 +17,15 @@ namespace metrics::scheduling
         for (size_t i = 0; i < processList->size(); ++i)
         {
             Process p = processList->at(i);
-            this->turnaroundTime += p.getCompletionTime();
-            this->responseTime += p.getFirstRunTime();
-            std::cout << i << ":\t" << "( " << p.getFirstRunTime() << ", " << p.getCompletionTime() << " )\n";
+            this->turnaroundTime += ( p.getCompletionTime() - p.getArrivalTime());
+            this->responseTime += ( p.getFirstRunTime() - p.getArrivalTime() );
+            std::cout << i 
+                << " " 
+                << " [" << p.getArrivalTime() << "]" << ": " 
+                << "( " << p.getFirstRunTime() << ", " << p.getCompletionTime() << " )"
+                << "\t\tExecution Time:\t"
+                << p.getElapsedTime()
+                << "\n";
         }
 
         this->turnaroundTimeAverage += std::to_string(this->turnaroundTime) + "/" + std::to_string(this->processCount);
@@ -31,7 +37,7 @@ namespace metrics::scheduling
 
     std::string ExecutionMetric::display(void)
     {
-        std::string metrics = this->method + "\t Turnaround Time: " + this->turnaroundTimeAverage + " = " + std::to_string(this->turnaroundTimeFloat);
+        std::string metrics = this->method + "\n\n Turnaround Time: " + this->turnaroundTimeAverage + " = " + std::to_string(this->turnaroundTimeFloat);
         metrics += "\t Response Time: " + this->responseTimeAverage + " = " + std::to_string(this->responseTimeFloat);
         return metrics;
     }

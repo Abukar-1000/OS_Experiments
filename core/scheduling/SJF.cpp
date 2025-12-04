@@ -1,23 +1,24 @@
-#include "FIFO.h"
+#include "SJF.h"
+#include <algorithm>
 
-FIFO::FIFO()
-: IScheduler(3)
+SJF::SJF()
+:   IScheduler(3)
 {}
 
-FIFO::FIFO(size_t size)
-: IScheduler(size)
+SJF::SJF(size_t size)
+:   IScheduler(size)
 {}
 
-void FIFO::run(void)
+void SJF::run(void)
 {
     size_t index = 0;
     size_t time = 0;
     this->randomizeProcessArrivalTime();
-    this->sortProcessesDecending();
-    
+    this->sortProcessExecutionTimeDecending();
+
     Process* p = &(this->processList->at(index));
 
-    std::cout << "FIFO running with " << this->processList->size() << " jobs.\n";
+    std::cout << "SJF running with " << this->processList->size() << " jobs.\n";
     while (index < this->processList->size())
     {
         if (!p->hasRun())
@@ -40,5 +41,4 @@ void FIFO::run(void)
         p->run(1);
         time++;
     }
-    
 }
