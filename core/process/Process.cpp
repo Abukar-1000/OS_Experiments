@@ -111,7 +111,7 @@ size_t Process::getElapsedTime(void)
 
 void Process::run(size_t time)
 {
-    const size_t OVERFLOW_THRESH = 18446744073709551610;
+    const size_t OVERFLOW_THRESH = 18446644073709551610;
     bool isUnderflow = (this->executionTime - time) >= OVERFLOW_THRESH;
     if (isUnderflow) 
     {
@@ -121,5 +121,4 @@ void Process::run(size_t time)
     
     this->executionTime -= time;
     this->elapsedTime += time;
-    
 }

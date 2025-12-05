@@ -1,6 +1,9 @@
-main: FIFO SJF
-	g++ -std=c++17 Process.o ExecutionMetric.o IScheduler.o FIFO.o SJF.o main.cpp -o schedulingEx
+main: FIFO SJF RoundRobin
+	g++ -std=c++17 -g Process.o ExecutionMetric.o IScheduler.o FIFO.o SJF.o RoundRobin.o main.cpp -o schedulingEx
 	./schedulingEx
+
+RoundRobin: ISchedule
+	g++ -std=c++17 -g -c IScheduler.o ..\core\scheduling\RoundRobin.cpp -o RoundRobin.o
 
 SJF: ISchedule
 	g++ -std=c++17 -g -c IScheduler.o ..\core\scheduling\SJF.cpp -o SJF.o
